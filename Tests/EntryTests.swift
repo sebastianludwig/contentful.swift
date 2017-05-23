@@ -117,18 +117,18 @@ class EntryTests: XCTestCase {
 
     func testFetchSingleEntry() {
         let expectation = self.expectation(description: "Fetch single entry expectation")
-        EntryTests.client.fetchEntry(id: "nyancat") { (result) in
-            switch result {
-            case let .success(entry):
-                expect(entry.sys.id).to(equal("nyancat"))
-                expect(entry.sys.type).to(equal("Entry"))
-                expect(entry.fields["name"] as? String).to(equal("Nyan Cat"))
-            case let .error(error):
-                fail("\(error)")
-            }
 
+        EntryTests.client.fetchEntry(id: "nyancat").then { nyanCat in
+
+            expect(nyanCat.sys.id).to(equal("nyancat"))
+            expect(nyanCat.sys.type).to(equal("Entry"))
+            expect(nyanCat.fields["name"] as? String).to(equal("Nyan Cat"))
+            expectation.fulfill()
+        }.error {
+            fail("\($0)")
             expectation.fulfill()
         }
+
         waitForExpectations(timeout: 10.0, handler: nil)
     }
 

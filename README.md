@@ -21,7 +21,7 @@ The Contentful Swift SDK hasn't reached 1.0.0 and is therefore subject to API ch
 | CDA Features | [contentful.swift][9] | [contentful.objc][4] |
 | ----  | ---- |
 | *Basic API coverage* | :white_check_mark: | :white_check_mark: | 
-| Images API | :construction::construction_worker: | :white_check_mark: |
+| Images API | :construction: :construction_worker: | :white_check_mark: |
 | Search Parameters | :white_check_mark: | :no_entry_sign: |
 | Fallback locales | :no_entry_sign: | :no_entry_sign: |
 | Rate limit handling | :no_entry_sign: | :no_entry_sign: |
@@ -34,14 +34,12 @@ The Contentful Swift SDK hasn't reached 1.0.0 and is therefore subject to API ch
 
 
 ```swift
-let client = Client(spaceIdentifier: "cfexampleapi", accessToken: "b4c0n73n7fu1")
-client.fetchEntry("nyancat") { (result) in
-    switch result {
-        case let .Success(entry):
-            print(entry)
-        case .Error(_):
-            print("Error!")
-    }
+let client = Client(spaceId: "cfexampleapi", accessToken: "b4c0n73n7fu1")
+
+client.fetchEntry("nyancat").then { nyanCat in
+    print(nyanCat.fields["name"]) // "Nyan Cat"
+}.error { error in
+    // Handle error.
 }
 ```
 
