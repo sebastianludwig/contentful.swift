@@ -19,7 +19,7 @@ The Contentful Swift SDK hasn't reached 1.0.0 and is therefore subject to API ch
 *DEFINE BASIC API COVERAGE...*
 
 | CDA Features | [contentful.swift][9] | [contentful.objc][4] |
-| ----  | ---- |
+| -----------  | ----------- | ----------- |
 | *Basic API coverage* | :white_check_mark: | :white_check_mark: | 
 | Images API | :construction::construction_worker: | :white_check_mark: |
 | Search Parameters | :white_check_mark: | :no_entry_sign: |
