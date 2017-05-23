@@ -3,11 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) starting from 1.x releases.
 
-## Unreleased
-
-#### Planned
+#### Plannedj for future releases
 - Better support and Swift'ier API for [Images API](https://www.contentful.com/developers/docs/references/images-api/).
 - Further iteration on `ContentModellable` protocol.
+
 
 ---
 

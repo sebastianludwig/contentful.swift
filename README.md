@@ -12,7 +12,23 @@ Swift SDK for [Contentful's][1] Content Delivery API.
 
 [Contentful][1] is a content management platform for web applications, mobile apps and connected devices. It allows you to create, edit & manage content in the cloud and publish it anywhere via powerful API. Contentful offers tools for managing editorial teams and enabling cooperation between organizations.
 
-The Contentful Swift SDK hasn't reached 1.0.0 and is therefore subject to API changes. However, it provides a more usable API than the [Objective-C SDK][4] from Swift. If you need some of the more advanced features, like [offline persistence][5] using Core Data, you have to stick to the Objective-C SDK for now. Check out our [Swift example][6] in this case.
+The Contentful Swift SDK hasn't reached 1.0.0 and is therefore subject to API changes. However, it provides a more usable API than it's counterpart, the [Objective-C SDK][4]. Check out our [Swift example][6] in this case.
+
+#### Full feature comparison.
+
+*DEFINE BASIC API COVERAGE...*
+
+| CDA Features | [contentful.swift][9] | [contentful.objc][4] |
+| ----  | ---- |
+| *Basic API coverage* | :white_check_mark: | :white_check_mark: | 
+| Images API | :construction::construction_worker: | :white_check_mark: |
+| Search Parameters | :white_check_mark: | :no_entry_sign: |
+| Fallback locales | :no_entry_sign: | :no_entry_sign: |
+| Rate limit handling | :no_entry_sign: | :no_entry_sign: |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+
 
 ## Usage
 
@@ -39,9 +55,22 @@ The Contentful Swift SDK requires, at minimum, Swift 2.2 and therefore Xcode 7.3
 
  Swift version | Compatible Contentful tag |
 | --- | --- |
-| Swift 3.0 | `v0.3.1` |
+| Swift 3.0 | >= `v0.3.1` |
 | Swift 2.3 | `v0.2.3`|
 | Swift 2.2 | `v0.2.1`|
+
+
+Note that for Swift 2.3 support (contentful.swift `v0.2.3`) you will need to add a post-install, configuration change to Pods.xcodeproj. You can do this via the Podfile:
+
+```ruby
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '2.3'
+    end
+  end
+end
+```
 
 ### Carthage installation
 
@@ -69,17 +98,6 @@ pod 'Contentful', '0.2.3'
 
 To learn more about operators for dependency versioning within a Podfile, see the [CocoaPods doc on the Podfile][7].
 
-Note that for Swift 2.3 support (contentful.swift `v0.2.3`) you will need to add a post-install, configuration change to Pods.xcodeproj. You can do this via the Podfile:
-
-```ruby
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '2.3'
-    end
-  end
-end
-```
 
 ## License
 
@@ -94,3 +112,4 @@ Copyright (c) 2016 Contentful GmbH. See LICENSE for further details.
 [6]: https://github.com/contentful-labs/swiftful
 [7]: https://guides.cocoapods.org/using/the-podfile.html
 [8]: https://github.com/Carthage/Carthage
+[9]: https://github.com/contentful/contentful.swift
