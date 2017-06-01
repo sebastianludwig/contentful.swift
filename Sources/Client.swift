@@ -161,9 +161,8 @@ open class Client {
     fileprivate func handleJSON<MappableType: ImmutableMappable>(_ data: Data, _ completion: ResultsHandler<MappableType>) {
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: [])
-            if let json = json as? NSDictionary { json.client = self }
 
-            let map = Map(mappingType: .fromJSON, JSON: json as! [String : Any])
+            let map = Map(mappingType: .fromJSON, JSON: json as! [String : Any], context: self)
 
             // Handle error thrown by CDA.
             if let error = try? ContentfulError(map: map) {
@@ -181,6 +180,8 @@ open class Client {
         }
     }
 }
+
+extension Client: MapContext { }
 
 // MARK: - Query
 
@@ -496,7 +497,10 @@ extension Client {
             completion(.success(space))
             return nil
         }
-        return fetch(url: self.URL(), then: completion)
+        return fetch(url: self.URL()) { (result: Result<Space>) in
+            self.space = result.value
+            completion(result)
+        }
     }
 
     /**

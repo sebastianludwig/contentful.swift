@@ -22,7 +22,7 @@ public class Asset: Resource, LocalizedResource {
     let defaultLocale: String
 
     /// Currently selected locale
-    public var locale: String
+    public var locale: String?
 
     /// The URL for the underlying media file
     public func URL() throws -> Foundation.URL {
@@ -42,7 +42,8 @@ public class Asset: Resource, LocalizedResource {
     public required init(map: Map) throws {
         let (locale, localizedFields) = try parseLocalizedFields(map.JSON)
         self.locale = locale
-        self.defaultLocale = determineDefaultLocale(map.JSON)
+        let client = map.context as? Client
+        self.defaultLocale = determineDefaultLocale(client: client)
         self.localizedFields = localizedFields
 
         try super.init(map: map)
